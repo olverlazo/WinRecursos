@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+      <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+
+
+    <link href="css/StyleSheetImprimir.css" rel="stylesheet" />
+
+
+</head>
+<body>
+
+      <button class="myButton" type="button">Imprimir</button>
+      <div id="HTMLPdf" class="datagrid">        
+        
+              <table id="TablePDF">
+                  <thead>
+                      <tr>
+                          <th>ID</th>
+                                        <th>Turno</th>
+                                        <th>Tipo</th>
+                                        <th>Fecha</th>
+                                        <th>Ingreso</th>
+                                        <th>Salida</th>
+                                        <th>Ingreso</th>
+                                        <th>Salida</th>
+                      </tr>
+                  </thead>
+                  <tfoot>
+                      <tr>
+                          <td colspan="8">
+                              <div id="no-paging">&nbsp;</div>
+                      </tr>
+                  </tfoot>
+                  <tbody>
+                      <tr>
+                          <td>data</td>
+                          <td>data</td>
+                          <td>data</td>
+                          <td>data</td>
+                          <td>data</td>
+                          <td>data</td>
+                          <td>data</td>
+                          <td>data</td>
+                      </tr>
+                      <tr class="alt">
+                          <td>data</td>
+                          <td>data</td>
+                          <td>data</td>
+                          <td>data</td>
+                          <td>data</td>
+                          <td>data</td>
+                          <td>data</td>
+                          <td>data</td>
+                      </tr>
+                     
+                      <tr>
+                          <td>data</td>
+                          <td>data</td>
+                          <td>data</td>
+                          <td>data</td>
+                          <td>data</td>
+                          <td>data</td>
+                          <td>data</td>
+                          <td>data</td>
+                      </tr>
+                  </tbody>
+              </table>
+      
+        </div>
+    </body>
+  
+           <script >
+            var idusuariopersonal
+            $(document).ready(function () {
+                idusuariopersonal = '<%= Session("idusuario").ToString%>';
+            });
+
+            $(function () {
+                $("#datepicker1").datepicker({
+                    autoclose: true,
+                    todayHighlight: true,
+                    todayBtn: "linked",
+                }).datepicker('update', new Date());        
+            });
+
+            //Timepicker
+            $('.timepicker').timepicker({
+                showMeridian: false,
+                showInputs: false,
+                use24hours: true,
+                format: 'HH:mm:ss'
+            })
+
+            //iCheck for checkbox and radio inputs
+            $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+                checkboxClass: 'icheckbox_minimal-blue',
+                radioClass: 'iradio_minimal-blue'
+            })
+
+
+
+            function get_HTMLPdf() {
+                var combo = document.getElementById("meano");
+                var mes = combo.options[combo.selectedIndex].text;
+                $.ajax({
+                    type: 'POST',
+                    url: "AdicionarTurnos.aspx/ListarTurnos",
+                    data: '{"v1": "' + idpersona1 + '","v2": "' + mes + '"}',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (json) {
+                        var table1 = $("#TablePDF").DataTable({
+                            'paging': false,
+                            'lengthChange': false,
+                            'searching': false,
+                            'ordering': false,
+                            'info': false,
+                            'autoWidth': false,
+                            language: {
+                                "processing": "Procesando...",
+                                "lengthMenu": "Mostrar _MENU_ registros",
+                                "zeroRecords": "No se encontraron resultados",
+                                "emptyTable": "Ningún dato encontrado",
+                                "info": "Registros del _START_ al _END_ de un total de _TOTAL_",
+                                "infoEmpty": false,
+                                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                                "search": "Buscar:",
+                                "infoThousands": ",",
+                                "loadingRecords": "Cargando...",
+                                "paginate": false,
+                                "aria": false,
+                            },
+                            destroy: true,
+                            responsive: true,
+                            "data": json.d.data,
+                            "columns": [
+                               { "data": "id_turno" },
+                               { "data": "aux" },
+                               { "data": "horario" },
+                               { "data": "fecha", type: 'date' },
+                               { "data": "hora1" },
+                               { "data": "hora2" },
+                               { "data": "hora3" },
+                               { "data": "hora4" },
+                            ],
+                        });
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        var err = eval("(" + XMLHttpRequest.responseText + ")");
+                        alert("Error!: " + err.Message)
+                    }
+                });
+                document.getElementById("HTMLPdf").style.display = 'inherit';
+            }
+
+
+            function generarPDF() {
+                //html2pdf().from(document.body).save('miDocumento.pdf')
+                var elemento = document.getElementById('HTMLPdf');
+                var opt = {
+                    margin: 1,
+                    filename: 'RolTurno.pdf',
+                    image: { type: 'pdf', quality: 0.98 },
+                    html2canvas: { scale: 5 },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
+                //html2pdf().set(opt).from(elemento).save();
+                html2pdf().set(opt).from(elemento).toPdf().get('pdf').then(
+                    function (pdf) {
+                        var newWindow = window.open(pdf.output('bloburl'), '_blank');
+                        if (newWindow) {
+                            newWindow.onload = () =>{
+                                newWindow.print()
+                            }
+                        }
+                    }
+                      )                      
+            }
+
+         
+
+            //obtiene los valores de la fila seleccionada
+            $(document).on('click', '#imprimir', function () {
+                generarPDF();
+              
+                document.getElementById("HTMLPdf").style.display = 'none';
+            });
+
+
+    </script>
+
+
+ 
+</html>

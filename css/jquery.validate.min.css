@@ -1,0 +1,15 @@
+/*.jquery-validate-error-message{color:red;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:.8em;vertical-align:middle;width:250px}
+.jquery-validate-error-message-sameline{margin-left:5px;vertical-align:middle}
+.jquery-validate-error-message-newline{display:block}
+.jquery-validate-field-error{border:1px solid red;background-color:#ffebef}
+input.jquery-validate-field-error{background:url("../images/icon-error.png") no-repeat scroll right center #ffebef}
+.jquery-validate-field-valid{border:1px solid green;background-color:#e3ffe5}
+input.jquery-validate-field-valid{background:url("../images/icon-valid.png") no-repeat scroll right center #e3ffe5}*/
+
+.jquery-validate-error-message{color:red;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:.8em;vertical-align:middle;width:250px}
+.jquery-validate-error-message-sameline{margin-left:5px;vertical-align:middle}
+.jquery-validate-error-message-newline{display:block}
+.jquery-validate-field-error{border:1px solid red;background-color:white}
+input.jquery-validate-field-error{background:url("../imagenes/icon-error.png") no-repeat scroll right center white}
+.jquery-validate-field-valid{border:1px solid green;background-color:white}
+input.jquery-validate-field-valid{background:url("../imagenes/icon-valid.png") no-repeat scroll right center white}

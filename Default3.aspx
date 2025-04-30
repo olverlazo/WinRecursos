@@ -1,0 +1,8 @@
+﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage4.master" AutoEventWireup="false" CodeFile="Default3.aspx.vb" Inherits="Default3" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <asp:Button ID="Button1" runat="server" Text="Button" />
+</asp:Content>
+

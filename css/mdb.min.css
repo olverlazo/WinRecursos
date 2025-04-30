@@ -1,0 +1,103 @@
+@import url('https://rsms.me/inter/inter.css');
+
+:root {
+  --color-lightin: white; /*color del fondo del span*/
+  --color-darkin: #2962ff;
+  --color-signalin: #3c8dbc;
+  --color-backgroundin: var(--color-lightin); 
+  --color-textin: var(--color-darkin);
+  --color-accentin: #3f4040;
+  --size-bezelin: 0.5rem;
+  --size-radiusin: 4px;
+}
+
+.l-design-widhtin {
+  max-width: 40rem;
+  padding: 1rem;
+}
+
+.inputin {
+  position: relative;
+  width: 100%;
+  }
+
+.inputin__labelin {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: calc(var(--size-bezelin) * 0.75) calc(var(--size-bezelin) * .5);
+    margin: calc(var(--size-bezelin) * 0.75 + 3px) calc(var(--size-bezelin) * .5);
+    background: red;
+    white-space: nowrap;
+    transform: translate(0, 0);
+    transform-origin: 0 0;
+    background: var(--color-backgroundin);
+    transition: transform 120ms ease-in;
+    font-weight: bold;
+    line-height: 1.2;
+    color: #3f4040;
+  }
+.inputin__fieldin{
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    border: 1px solid currentColor;
+    padding: calc(var(--size-bezelin) * 1.5) var(--size-bezelin);
+    /*color: #3f4040;*//*currentColor;*/
+     color: currentColor;
+    background: transparent;
+    border-radius: var(--size-radiusin);
+ }
+  .inputin__fieldin:focus + .inputin__labelin, .inputin__fieldin:not(:placeholder-shown) + .inputin__labelin {
+  transform: translate(0.25rem, -65%) scale(0.8);
+  color: var(--color-accentin);
+}
+ 
+.btns {
+  padding: 30px 0 0 200px;
+}
+.btns .btn {
+  display: inline-block;
+  margin-right: 2px;
+  padding: 10px 25px;
+  background: none;
+  border: 1px solid #c0c0c0;
+  border-radius: 2px;
+  color: #666;
+  font-size: 1.125em;
+  outline: none;
+  transition: all 100ms ease-out;
+}
+.btns .btn:hover, .btns .btn:focus {
+  transform: translateY(-3px);
+}
+.btns .btn-confirm {
+  border: 1px solid #2962ff;
+  background: #2962ff;
+  color: #fff;
+}
+
+
+
+/*td.details-control {
+    background: url('../imagenes/icon-valid.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.details td.details-control {
+    background: url('../imagenes/error.png') no-repeat center center;
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
